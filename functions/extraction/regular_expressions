@@ -1,0 +1,18 @@
+import re
+
+
+def find_high_unicode(record):
+    regex = r"[^\x00-\x7F]+"
+    for token in record["your-attribute"]:
+        if re.search(regex, token.text):
+            yield "your-label", token.i, token.i
+
+
+def mark_paragraph_by_keyword(record):
+    regex = r"(?i)([^.;:!?]*YOUR_KEYWORD+[^.;:!?]*)"
+    # TODO!
+
+
+def mark_paragraph(record):
+    regex = "r'\[(.*?)\]'"
+    # TODO!

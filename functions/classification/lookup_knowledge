@@ -1,0 +1,7 @@
+import knowledge
+
+
+def lkp_indicator(record):
+    for term in knowledge.your_label:
+        if term.lower() in record["your-attribute"].text.lower():
+            return "your-label"
