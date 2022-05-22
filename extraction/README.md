@@ -16,7 +16,7 @@ We're now going to look into the different types of labeling functions you can i
 To start, we'll look at vanilla labeling functions. They are simple to understand and build the outline for all other types of labeling functions in extraction. In general, you need to loop over your tokens, implement some identification logic, and yield a triplet consisting of the label name, the span start index, and the span end index. An example could look as follows:
 
 ```python
-record = {"details": "The electronics chain said the used iPhones, which were returned within 30 days of purchase, are priced at $149 for the model with 8 gigabytes of storage,  while the 16-gigabyte version is $249"}
+record = {"details": nlp("The electronics chain said the used iPhones, which were returned within 30 days of purchase, are priced at $149 for the model with 8 gigabytes of storage,  while the 16-gigabyte version is $249")}
 # we're skipping the spacy processing here and in the following examples
 
 def detect_money(record):
@@ -34,7 +34,7 @@ Of course, this can become cumbersome to implement, so please take a look at the
 If you don't want to worry about matching the right indices, and only want to provide a regular expression, the following template is perfect for you:
 
 ```python
-record = {"details": "The electronics chain said the used iPhones, which were returned within 30 days of purchase, are priced at $149 for the model with 8 gigabytes of storage,  while the 16-gigabyte version is $249"}
+record = {"details": nlp("The electronics chain said the used iPhones, which were returned within 30 days of purchase, are priced at $149 for the model with 8 gigabytes of storage,  while the 16-gigabyte version is $249")}
 
 def detect_money_regex(record):
     YOUR_REGEX = "\$[0-9]+" # choose any regex here
@@ -70,7 +70,7 @@ for span in detect_money_regex(record):
 Alternatively, you might want to find matches based on cue words within a certain window size, e.g. if it is difficult to list the entity you want to tag, but it is easy to define it by surrounding terms. To do so, you can implement a window-based approach:
 
 ```python
-record = {"details": "Max Mustermann decided to join Kern AI, where he wants to build great software."}
+record = {"details": nlp("Max Mustermann decided to join Kern AI, where he wants to build great software.")}
 
 def window_cue_search(doc):
     YOUR_WINDOW = 4 # choose any window size here
@@ -94,7 +94,7 @@ Window search matchers become super-powerful if you match them with dynamic know
 This type of labeling function is a bit more niche, but still super valuable: matching aspects. To implement them, we can just integrate libraries such as `TextBlob` into our function:
 
 ```python
-record = {"details" : "It has a really great battery life, but I hate the window size..."}
+record = {"details" : nlp("It has a really great battery life, but I hate the window size...")}
 
 from textblob import TextBlob
 def aspect_matcher(doc):
@@ -121,7 +121,7 @@ for span in aspect_matcher(record):
 Gazetters are super helpful if you want to repeat some labeling based on lookup values. For instance, if you already have some database or knowledge base you want to integrate, they become really helpful:
 
 ```python
-record = {"details": "Max Mustermann decided to join Kern AI, where he wants to build great software."}
+record = {"details": nlp("Max Mustermann decided to join Kern AI, where he wants to build great software.")}
 
 def gazetter(record):
     YOUR_ATTRIBUTE = "details"
@@ -131,7 +131,7 @@ def gazetter(record):
         if any([chunk.text in trie or trie in chunk.text for trie in LOOKUP_VALUES]):
             yield YOUR_LABEL, chunk.start, chunk.end
 
-for span in aspect_matcher(record):
+for span in gazetter(record):
     print(f'{record["details"][span[1]: span[2]]} -> {span[0]}')
 ```
 
