@@ -34,6 +34,7 @@ Of course, this can become cumbersome to implement, so please take a look at the
 If you don't want to worry about matching the right indices, and only want to provide a regular expression, the following template is perfect for you:
 
 ```python
+import re
 record = {"details": nlp("The electronics chain said the used iPhones, which were returned within 30 days of purchase, are priced at $149 for the model with 8 gigabytes of storage,  while the 16-gigabyte version is $249")}
 
 def detect_money_regex(record):
@@ -58,7 +59,7 @@ def detect_money_regex(record):
             string = string[end:]
             
     for start, end in regex_search(YOUR_REGEX, record[YOUR_ATTRIBUTE].text):
-        span = doc.char_span(start, end, alignment_mode="expand")
+        span = record[YOUR_ATTRIBUTE].char_span(start, end, alignment_mode="expand")
         yield YOUR_LABEL, span.start, span.end
 
 for span in detect_money_regex(record):
@@ -104,8 +105,8 @@ def aspect_matcher(doc):
     NEGATIVE_LABEL = "NEGATIVE"
     POSITIVE_LABEL = "POSITIVE"
     for chunk in record[YOUR_ATTRIBUTE].noun_chunks:
-        left_bound = max(chunk.sent.start, chunk.start - (window // 2) +1)
-        right_bound = min(chunk.sent.end, chunk.end + (window // 2) + 1)
+        left_bound = max(chunk.sent.start, chunk.start - (YOUR_WINDOW // 2) +1)
+        right_bound = min(chunk.sent.end, chunk.end + (YOUR_WINDOW // 2) + 1)
         window_doc = record[YOUR_ATTRIBUTE][left_bound: right_bound]
         sentiment = TextBlob(window_doc.text).polarity
         if sentiment < -YOUR_SENSITIVITY:
