@@ -71,7 +71,7 @@ from textblob import TextBlob
 def textblob_sentiment(record):
     YOUR_ATTRIBUTE = "mail"
     YOUR_SENSITIVITY = 0.5
-    if TextBlob(record[YOUR_ATTRIBUTE]).sentiment.polarity < -YOUR_SENSITIVITY:
+    if TextBlob(record[YOUR_ATTRIBUTE].text).sentiment.polarity < -YOUR_SENSITIVITY:
         return "spam"
 ```
 
