@@ -68,7 +68,7 @@ For a defined list of libraries, you can also just import some module and use th
 ```python
 from textblob import TextBlob
 
-def lkp_known_sender(record):
+def textblob_sentiment(record):
     YOUR_ATTRIBUTE = "mail"
     YOUR_SENSITIVITY = 0.5
     if TextBlob(record[YOUR_ATTRIBUTE]).sentiment.polarity < -YOUR_SENSITIVITY:
