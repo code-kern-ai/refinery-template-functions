@@ -121,6 +121,8 @@ for span in aspect_matcher(record):
 Gazetters are super helpful if you want to repeat some labeling based on lookup values. For instance, if you already have some database or knowledge base you want to integrate, they become really helpful:
 
 ```python
+record = {"details": "Max Mustermann decided to join Kern AI, where he wants to build great software."}
+
 def gazetter(record):
     YOUR_ATTRIBUTE = "details"
     YOUR_LABEL = "PERSON"
