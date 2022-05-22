@@ -141,5 +141,8 @@ for span in gazetter(record):
 
 Depending on your implementation, gazetters can really help to get label consistency throughout your documents. For instance, if you want to label that `Max Meier` is a person, a gazetter will ensure that you also find `Max` or `Mr. Meier` in your data.
 
+## Active learning
+Via manually labeling data, you can also make use of active learning components in Kern. As with the other labeling functions, they don't need to be perfect, but you should still aim for a good precision.
+
 ## Further ideas?
 If you want to add some own labeling function templates, please let us know. We're happy to add them here!
