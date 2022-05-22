@@ -1,7 +1,0 @@
-from textblob import TextBlob
-
-
-def sentiment_from_textblob(record):
-    blob_result = TextBlob(record["your-attribute"])
-    if blob_result.sentiment.polarity > 0.2:
-        return "positive"

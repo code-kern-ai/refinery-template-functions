@@ -1,4 +1,0 @@
-def lookup_person(record):
-    for token in record["headline"]:
-        if token.ent_type_ == "PERSON":
-            yield "person", token.i, token.i
