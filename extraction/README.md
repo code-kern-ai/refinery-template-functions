@@ -66,6 +66,9 @@ for span in detect_money_regex(record):
     print(f'{record["details"][span[1]: span[2]]} -> {span[0]}')
 ```
 
+If you have struggle writing your regular expressions, check out these two great resources:
+- [Regex tutorial — A quick cheatsheet by examples](https://medium.com/factory-mind/regex-tutorial-a-simple-cheatsheet-by-examples-649dc1c3f285)
+- [Regex cookbook — Top 10 Most wanted regex](https://medium.com/factory-mind/regex-cookbook-most-wanted-regex-aa721558c3c1)
 
 ## Window search matchers
 Alternatively, you might want to find matches based on cue words within a certain window size, e.g. if it is difficult to list the entity you want to tag, but it is easy to define it by surrounding terms. To do so, you can implement a window-based approach:
