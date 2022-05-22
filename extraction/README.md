@@ -130,6 +130,9 @@ def gazetter(record):
     for chunk in record[YOUR_ATTRIBUTE].noun_chunks:
         if any([chunk.text in trie or trie in chunk.text for trie in LOOKUP_VALUES]):
             yield YOUR_LABEL, chunk.start, chunk.end
+
+for span in aspect_matcher(record):
+    print(f'{record["details"][span[1]: span[2]]} -> {span[0]}')
 ```
 
 Depending on your implementation, gazetters can really help to get label consistency throughout your documents. For instance, if you want to label that `Max Meier` is a person, a gazetter will ensure that you also find `Max` or `Mr. Meier` in your data.
