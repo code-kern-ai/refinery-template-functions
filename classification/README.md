@@ -1,6 +1,6 @@
 # Classification
 
-Writing heuristics for classification is extremely simple. Those functions can consist of as little as 3 lines of Python. We're going to look further into how they work, and wo we make use of them at Kern.
+Writing heuristics for classification is extremely simple. Those functions can consist of as little as 3 lines of Python. We're going to look further into how they work, and where we make use of them at Kern.
 
 Generally, we automatically preprocess texts using [`spaCy`](https://spacy.io/), as this gives you potentially valuable metadata about the structures of your text.
 
@@ -29,7 +29,7 @@ def is_capslock(record):
         return "spam"
 ```
 
-Which tells the later used weak supervision model that mails that are written in full capslock tend to be spam mails. We don't have to make any assumption about how this would look like for `ham` in that function - that is a really helfpul characteristic of labeling functions. You don't have to go for a 100% coverage.
+This tells the later used weak supervision model that mails that are written in full capslock tend to be spam mails. We don't have to make any assumption about how this would look like for `ham` in that function - that is a really helpful characteristic of labeling functions. You don't have to go for a 100% coverage.
 
 ## Regex expression matching
 Another great way to build labeling functions is using regular expressions. They can be as easy as:
@@ -44,12 +44,12 @@ def contains_send_money(record):
         return "spam"
 ```
 
-If you have struggle writing your regular expressions, check out these two great resources:
+If you struggle with writing your regular expressions, check out these two great resources
 - [Regex tutorial — A quick cheatsheet by examples](https://medium.com/factory-mind/regex-tutorial-a-simple-cheatsheet-by-examples-649dc1c3f285)
 - [Regex cookbook — Top 10 Most wanted regex](https://medium.com/factory-mind/regex-cookbook-most-wanted-regex-aa721558c3c1)
 
 ## Lookup functions
-Generally, you can also include some kind of list to iterate through. At Kern, we automatically generate those lists from entites you manually label in extraction tasks, and store them in variables of the `knowledge` module. Let's say we have a knowledge base called `known_senders`:
+Generally, you can also include some kind of list to iterate through. At Kern, we automatically generate those lists from entities you manually label in extraction tasks and store them in variables of the `knowledge` module. Let's say we have a lookup list called `known_senders`:
 
 ```python
 import knowledge
@@ -58,7 +58,7 @@ def lkp_known_sender(record):
     YOUR_ATTRIBUTE = "sender"
     for known_sender in knowledge.known_senders:
         # knowledge.senders might look like this: ["johannes.hoetter@kern.ai", "henrik.wenck@kern.ai", ...]
-        if known_sender.lower() in record[YOUR_ATTRIBUTE].lower():
+        if known_sender.lower() in record[YOUR_ATTRIBUTE].text.lower():
             return "ham"
 ```
 
@@ -92,4 +92,4 @@ def call_production_model(record):
 In addition to custom labeling functions, you can also easily implement active learners and zero-shot models on your classification tasks. This way, you can also express heuristics without knowing the exact inner mechanics of some labeling distribution.
 
 ## Further ideas?
-If you want to add some own labeling function templates, please let us know. We're happy to add them here!
+If you want us to add your labeling function templates, please let us know. We're always happy to add them here!
