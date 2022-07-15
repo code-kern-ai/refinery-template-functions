@@ -58,7 +58,7 @@ def lkp_known_sender(record):
     YOUR_ATTRIBUTE = "sender"
     for known_sender in knowledge.known_senders:
         # knowledge.senders might look like this: ["johannes.hoetter@kern.ai", "henrik.wenck@kern.ai", ...]
-        if known_sender.lower() in record[YOUR_ATTRIBUTE].lower():
+        if known_sender.lower() in record[YOUR_ATTRIBUTE].text.lower():
             return "ham"
 ```
 

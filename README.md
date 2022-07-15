@@ -1,8 +1,15 @@
-# template-functions
+![](template-lf.png)
+
 In this repository, you can find sample labeling functions for classification and extraction tasks.
 
+If you like what we're working on, please leave a ⭐ for [refinery](https://github.com/code-kern-ai/refinery)!
+
 ## Usage
-There are two `README`s, one for [classifiers](classification/README.md), one for [extractors](extraction/README.md). Depending on your task at hand, please look into the respective `README`.
+There are two `README`s:
+- [classifier labeling functions](classification/README.md)
+- [extraction labeling functions](extraction/README.md)
+
+Depending on your task at hand, please look into the respective `README`.
 
 ## About labeling functions
 Generally, labeling functions can be:
@@ -11,8 +18,6 @@ Generally, labeling functions can be:
 - Lookups in lists or databases, such as a list of known organizations
 - General heuristics, such as grammar checks
 - Metadata-based functions, e.g. predicting on the value of other attributes
-- Crowd labeling (we're not going to focus on this here)
-
 
 ## Contributing
 Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
